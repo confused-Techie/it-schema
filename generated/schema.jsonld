@@ -1,0 +1,196 @@
+{
+  "@context": {
+    "0": "https://it-schema.com/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "schema": "https://schema.org"
+  },
+  "@graph": [
+    {
+      "@id": "0:ProductInstance",
+      "@type": "rdfs:Class",
+      "rdfs:label": "ProductInstance",
+      "rdfs:comment": "A unique singular instance of a defined product.",
+      "rdfs:subClassOf": {
+        "@id": "schema:Product"
+      }
+    },
+    {
+      "@id": "0:asset",
+      "@type": "rdf:Property",
+      "rdfs:label": "asset",
+      "rdfs:comment": "Asset number or identifier from this specific product instance.",
+      "rdfs:domain": {
+        "@id": "0:ProductInstance"
+      },
+      "rdfs:range": {
+        "@id": "schema:Text"
+      }
+    },
+    {
+      "@id": "0:serial",
+      "@type": "rdf:Property",
+      "rdfs:label": "serial",
+      "rdfs:comment": "Serial number for this product instance.",
+      "rdfs:domain": {
+        "@id": "0:ProductInstance"
+      },
+      "rdfs:range": {
+        "@id": "schema:Text"
+      }
+    },
+    {
+      "@id": "0:location",
+      "@type": "rdf:Property",
+      "rdfs:label": "location",
+      "rdfs:comment": "The current location of the product instance.",
+      "rdfs:domain": {
+        "@id": "0:ProductInstance"
+      },
+      "rdfs:range": {
+        "@id": "schema:Place"
+      }
+    },
+    {
+      "@id": "0:ComputeDevice",
+      "@type": "rdfs:Class",
+      "rdfs:label": "ComputeDevice",
+      "rdfs:comment": "A singular device that does some type of computing. This could\r\nbe a switch, laptop, desktop, access point, server, monitor, etc. More specific\r\ntypes could be used if an available schema fits, otherwise this is a generic\r\ncatch-all device that can apply to a huge range of devices.\r\n",
+      "rdfs:subClassOf": {
+        "@id": "0:ProductInstance"
+      }
+    },
+    {
+      "@id": "0:AccessPoint",
+      "@type": "rdfs:Class",
+      "rdfs:label": "AccessPoint",
+      "rdfs:comment": "An access-point device that provides wireless network access to clients.",
+      "rdfs:subClassOf": {
+        "@id": "0:ComputeDevice"
+      }
+    },
+    {
+      "@id": "0:NetworkSwitch",
+      "@type": "rdfs:Class",
+      "rdfs:label": "NetworkSwitch",
+      "rdfs:comment": "A networking switch that provides wired network access to clients or servers.",
+      "rdfs:subClassOf": {
+        "@id": "0:ComputeDevice"
+      }
+    },
+    {
+      "@id": "0:PersonalComputer",
+      "@type": "rdfs:Class",
+      "rdfs:label": "PersonalComputer",
+      "rdfs:comment": "A personal computer device, generally used by clients or end-users.",
+      "rdfs:subClassOf": {
+        "@id": "0:ComputeDevice"
+      }
+    },
+    {
+      "@id": "0:deviceClass",
+      "@type": "rdf:Property",
+      "rdfs:label": "deviceClass",
+      "rdfs:comment": ""
+    },
+    {
+      "@id": "0:hardware",
+      "@type": "rdf:Property",
+      "rdfs:label": "hardware",
+      "rdfs:comment": "A list of hardware that a compute device has.",
+      "rdfs:domain": {
+        "@id": "0:ComputeDevice"
+      },
+      "rdfs:range": {
+        "@id": "0:ComputeHardware"
+      }
+    },
+    {
+      "@id": "0:ComputeHardware",
+      "@type": "rdfs:Class",
+      "rdfs:label": "ComputeHardware",
+      "rdfs:comment": "The basis of computer hardware for any ComputeDevice.",
+      "rdfs:subClassOf": {
+        "@id": "schema:Thing"
+      }
+    },
+    {
+      "@id": "0:HardwareStatus",
+      "@type": "rdfs:Class",
+      "rdfs:label": "HardwareStatus",
+      "rdfs:comment": "Status of a compute hardware device.",
+      "rdfs:subClassOf": {
+        "@id": "schema:StatusEnumeration"
+      }
+    },
+    {
+      "@id": "0:Active",
+      "@type": "0:HardwareStatus",
+      "rdfs:label": "Active",
+      "rdfs:comment": "The device is enabled and in use."
+    },
+    {
+      "@id": "0:Enabled",
+      "@type": "0:HardwareStatus",
+      "rdfs:label": "Enabled",
+      "rdfs:comment": "The device is enabled, but not currently in use."
+    },
+    {
+      "@id": "0:Disabled",
+      "@type": "0:HardwareStatus",
+      "rdfs:label": "Disabled",
+      "rdfs:comment": "The device is non-functional."
+    },
+    {
+      "@id": "0:operatingSystem",
+      "@type": "rdf:Property",
+      "rdfs:label": "operatingSystem",
+      "rdfs:comment": "The operating system of the device.",
+      "rdfs:domain": {
+        "@id": "0:ComputeDevice"
+      },
+      "rdfs:range": {
+        "@id": "0:OperatingSystemEnumeration"
+      }
+    },
+    {
+      "@id": "0:OperatingSystemEnumeration",
+      "@type": "rdfs:Class",
+      "rdfs:label": "OperatingSystemEnumeration",
+      "rdfs:comment": "The platform's operating system.",
+      "rdfs:subClassOf": {
+        "@id": "schema:Enumeration"
+      }
+    },
+    {
+      "@id": "0:Windows",
+      "@type": "0:OperatingSystemEnumeration",
+      "rdfs:label": "Windows"
+    },
+    {
+      "@id": "0:Linux",
+      "@type": "0:OperatingSystemEnumeration",
+      "rdfs:label": "Linux"
+    },
+    {
+      "@id": "0:macOS",
+      "@type": "0:OperatingSystemEnumeration",
+      "rdfs:label": "macOS"
+    },
+    {
+      "@id": "0:Android",
+      "@type": "0:OperatingSystemEnumeration",
+      "rdfs:label": "Android"
+    },
+    {
+      "@id": "0:iOS",
+      "@type": "0:OperatingSystemEnumeration",
+      "rdfs:label": "iOS"
+    },
+    {
+      "@id": "0:iPadOS",
+      "@type": "0:OperatingSystemEnumeration",
+      "rdfs:label": "iPadOS"
+    }
+  ]
+}
