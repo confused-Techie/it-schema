@@ -1,13 +1,13 @@
 {
   "@context": {
-    "0": "https://it-schema.com/",
+    "it": "https://it-schema.com/",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "schema": "https://schema.org"
   },
   "@graph": [
     {
-      "@id": "0:ProductInstance",
+      "@id": "it:ProductInstance",
       "@type": "rdfs:Class",
       "rdfs:label": "ProductInstance",
       "rdfs:comment": "A unique singular instance of a defined product.",
@@ -16,97 +16,97 @@
       }
     },
     {
-      "@id": "0:asset",
+      "@id": "it:asset",
       "@type": "rdf:Property",
       "rdfs:label": "asset",
       "rdfs:comment": "Asset number or identifier from this specific product instance.",
       "rdfs:domain": {
-        "@id": "0:ProductInstance"
+        "@id": "it:ProductInstance"
       },
       "rdfs:range": {
         "@id": "schema:Text"
       }
     },
     {
-      "@id": "0:serial",
+      "@id": "it:serial",
       "@type": "rdf:Property",
       "rdfs:label": "serial",
       "rdfs:comment": "Serial number for this product instance.",
       "rdfs:domain": {
-        "@id": "0:ProductInstance"
+        "@id": "it:ProductInstance"
       },
       "rdfs:range": {
         "@id": "schema:Text"
       }
     },
     {
-      "@id": "0:location",
+      "@id": "it:location",
       "@type": "rdf:Property",
       "rdfs:label": "location",
       "rdfs:comment": "The current location of the product instance.",
       "rdfs:domain": {
-        "@id": "0:ProductInstance"
+        "@id": "it:ProductInstance"
       },
       "rdfs:range": {
         "@id": "schema:Place"
       }
     },
     {
-      "@id": "0:ComputeDevice",
+      "@id": "it:ComputeDevice",
       "@type": "rdfs:Class",
       "rdfs:label": "ComputeDevice",
-      "rdfs:comment": "A singular device that does some type of computing. This could\r\nbe a switch, laptop, desktop, access point, server, monitor, etc. More specific\r\ntypes could be used if an available schema fits, otherwise this is a generic\r\ncatch-all device that can apply to a huge range of devices.\r\n",
+      "rdfs:comment": "A singular device that does some type of computing. This could be a switch, laptop, desktop, access point, server, monitor, etc. More specific types could be used if an available schema fits, otherwise this is a generic catch-all device that can apply to a huge range of devices.",
       "rdfs:subClassOf": {
-        "@id": "0:ProductInstance"
+        "@id": "it:ProductInstance"
       }
     },
     {
-      "@id": "0:AccessPoint",
+      "@id": "it:AccessPoint",
       "@type": "rdfs:Class",
       "rdfs:label": "AccessPoint",
       "rdfs:comment": "An access-point device that provides wireless network access to clients.",
       "rdfs:subClassOf": {
-        "@id": "0:ComputeDevice"
+        "@id": "it:ComputeDevice"
       }
     },
     {
-      "@id": "0:NetworkSwitch",
+      "@id": "it:NetworkSwitch",
       "@type": "rdfs:Class",
       "rdfs:label": "NetworkSwitch",
       "rdfs:comment": "A networking switch that provides wired network access to clients or servers.",
       "rdfs:subClassOf": {
-        "@id": "0:ComputeDevice"
+        "@id": "it:ComputeDevice"
       }
     },
     {
-      "@id": "0:PersonalComputer",
+      "@id": "it:PersonalComputer",
       "@type": "rdfs:Class",
       "rdfs:label": "PersonalComputer",
       "rdfs:comment": "A personal computer device, generally used by clients or end-users.",
       "rdfs:subClassOf": {
-        "@id": "0:ComputeDevice"
+        "@id": "it:ComputeDevice"
       }
     },
     {
-      "@id": "0:deviceClass",
+      "@id": "it:deviceClass",
       "@type": "rdf:Property",
       "rdfs:label": "deviceClass",
       "rdfs:comment": ""
     },
     {
-      "@id": "0:hardware",
+      "@id": "it:hardware",
       "@type": "rdf:Property",
       "rdfs:label": "hardware",
       "rdfs:comment": "A list of hardware that a compute device has.",
       "rdfs:domain": {
-        "@id": "0:ComputeDevice"
+        "@id": "it:ComputeDevice"
       },
       "rdfs:range": {
-        "@id": "0:ComputeHardware"
+        "@id": "it:ComputeHardware"
       }
     },
     {
-      "@id": "0:ComputeHardware",
+      "@id": "it:ComputeHardware",
       "@type": "rdfs:Class",
       "rdfs:label": "ComputeHardware",
       "rdfs:comment": "The basis of computer hardware for any ComputeDevice.",
@@ -115,7 +115,7 @@
       }
     },
     {
-      "@id": "0:HardwareStatus",
+      "@id": "it:HardwareStatus",
       "@type": "rdfs:Class",
       "rdfs:label": "HardwareStatus",
       "rdfs:comment": "Status of a compute hardware device.",
@@ -124,37 +124,37 @@
       }
     },
     {
-      "@id": "0:Active",
-      "@type": "0:HardwareStatus",
+      "@id": "it:Active",
+      "@type": "it:HardwareStatus",
       "rdfs:label": "Active",
       "rdfs:comment": "The device is enabled and in use."
     },
     {
-      "@id": "0:Enabled",
-      "@type": "0:HardwareStatus",
+      "@id": "it:Enabled",
+      "@type": "it:HardwareStatus",
       "rdfs:label": "Enabled",
       "rdfs:comment": "The device is enabled, but not currently in use."
     },
     {
-      "@id": "0:Disabled",
-      "@type": "0:HardwareStatus",
+      "@id": "it:Disabled",
+      "@type": "it:HardwareStatus",
       "rdfs:label": "Disabled",
       "rdfs:comment": "The device is non-functional."
     },
     {
-      "@id": "0:operatingSystem",
+      "@id": "it:operatingSystem",
       "@type": "rdf:Property",
       "rdfs:label": "operatingSystem",
       "rdfs:comment": "The operating system of the device.",
       "rdfs:domain": {
-        "@id": "0:ComputeDevice"
+        "@id": "it:ComputeDevice"
       },
       "rdfs:range": {
-        "@id": "0:OperatingSystemEnumeration"
+        "@id": "it:OperatingSystemEnumeration"
       }
     },
     {
-      "@id": "0:OperatingSystemEnumeration",
+      "@id": "it:OperatingSystemEnumeration",
       "@type": "rdfs:Class",
       "rdfs:label": "OperatingSystemEnumeration",
       "rdfs:comment": "The platform's operating system.",
@@ -163,33 +163,33 @@
       }
     },
     {
-      "@id": "0:Windows",
-      "@type": "0:OperatingSystemEnumeration",
+      "@id": "it:Windows",
+      "@type": "it:OperatingSystemEnumeration",
       "rdfs:label": "Windows"
     },
     {
-      "@id": "0:Linux",
-      "@type": "0:OperatingSystemEnumeration",
+      "@id": "it:Linux",
+      "@type": "it:OperatingSystemEnumeration",
       "rdfs:label": "Linux"
     },
     {
-      "@id": "0:macOS",
-      "@type": "0:OperatingSystemEnumeration",
+      "@id": "it:macOS",
+      "@type": "it:OperatingSystemEnumeration",
       "rdfs:label": "macOS"
     },
     {
-      "@id": "0:Android",
-      "@type": "0:OperatingSystemEnumeration",
+      "@id": "it:Android",
+      "@type": "it:OperatingSystemEnumeration",
       "rdfs:label": "Android"
     },
     {
-      "@id": "0:iOS",
-      "@type": "0:OperatingSystemEnumeration",
+      "@id": "it:iOS",
+      "@type": "it:OperatingSystemEnumeration",
       "rdfs:label": "iOS"
     },
     {
-      "@id": "0:iPadOS",
-      "@type": "0:OperatingSystemEnumeration",
+      "@id": "it:iPadOS",
+      "@type": "it:OperatingSystemEnumeration",
       "rdfs:label": "iPadOS"
     }
   ]
