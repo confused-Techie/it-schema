@@ -2,6 +2,7 @@
  * Generate new data from the original `./data/schema.ttl` file.
  * Creating the following items:
  *  - JSON-LD data
+ *  - RDF+XML data
 */
 
 const fs = require("fs");
@@ -60,5 +61,3 @@ xw.endDocument();
 const rdf = xw.toString();
 
 fs.writeFileSync("./generated/schema.rdf", rdf, { encoding: "utf8" });
-
-// JSON-LD => HTML
