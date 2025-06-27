@@ -1,112 +1,108 @@
-@prefix : <https://it-schema.com/> .
+@prefix it: <https://it-schema.com/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <https://schema.org> .
 
-:ProductInstance a rdfs:Class ;
+it:ProductInstance a rdfs:Class ;
   rdfs:label "ProductInstance" ;
   rdfs:comment "A unique singular instance of a defined product." ;
   rdfs:subClassOf schema:Product .
 
-:asset a rdf:Property ;
+it:asset a rdf:Property ;
   rdfs:label "asset" ;
   rdfs:comment "Asset number or identifier from this specific product instance." ;
-  rdfs:domain :ProductInstance ;
+  rdfs:domain it:ProductInstance ;
   rdfs:range schema:Text .
 
-:serial a rdf:Property ;
+it:serial a rdf:Property ;
   rdfs:label "serial" ;
   rdfs:comment "Serial number for this product instance." ;
-  rdfs:domain :ProductInstance ;
+  rdfs:domain it:ProductInstance ;
   rdfs:range schema:Text .
 
-:location a rdf:Property ;
+it:location a rdf:Property ;
   rdfs:label "location" ;
   rdfs:comment "The current location of the product instance." ;
-  rdfs:domain :ProductInstance ;
+  rdfs:domain it:ProductInstance ;
   rdfs:range schema:Place .
 
-:ComputeDevice a rdfs:Class ;
+it:ComputeDevice a rdfs:Class ;
   rdfs:label "ComputeDevice" ;
-  rdfs:comment """A singular device that does some type of computing. This could
-be a switch, laptop, desktop, access point, server, monitor, etc. More specific
-types could be used if an available schema fits, otherwise this is a generic
-catch-all device that can apply to a huge range of devices.
-""" ;
-  rdfs:subClassOf :ProductInstance .
+  rdfs:comment "A singular device that does some type of computing. This could be a switch, laptop, desktop, access point, server, monitor, etc. More specific types could be used if an available schema fits, otherwise this is a generic catch-all device that can apply to a huge range of devices." ;
+  rdfs:subClassOf it:ProductInstance .
 
-:AccessPoint a rdfs:Class ;
+it:AccessPoint a rdfs:Class ;
   rdfs:label "AccessPoint" ;
   rdfs:comment "An access-point device that provides wireless network access to clients." ;
-  rdfs:subClassOf :ComputeDevice .
+  rdfs:subClassOf it:ComputeDevice .
 
-:NetworkSwitch a rdfs:Class ;
+it:NetworkSwitch a rdfs:Class ;
   rdfs:label "NetworkSwitch" ;
   rdfs:comment "A networking switch that provides wired network access to clients or servers." ;
-  rdfs:subClassOf :ComputeDevice .
+  rdfs:subClassOf it:ComputeDevice .
 
-:PersonalComputer a rdfs:Class ;
+it:PersonalComputer a rdfs:Class ;
   rdfs:label "PersonalComputer" ;
   rdfs:comment "A personal computer device, generally used by clients or end-users." ;
-  rdfs:subClassOf :ComputeDevice .
+  rdfs:subClassOf it:ComputeDevice .
 
-:deviceClass a rdf:Property ;
+it:deviceClass a rdf:Property ;
   rdfs:label "deviceClass" ;
   rdfs:comment "" .
-  
-:hardware a rdf:Property ;
+
+it:hardware a rdf:Property ;
   rdfs:label "hardware" ;
   rdfs:comment "A list of hardware that a compute device has." ;
-  rdfs:domain :ComputeDevice ;
-  rdfs:range :ComputeHardware .
+  rdfs:domain it:ComputeDevice ;
+  rdfs:range it:ComputeHardware .
 
-:ComputeHardware a rdfs:Class ;
+it:ComputeHardware a rdfs:Class ;
   rdfs:label "ComputeHardware" ;
   rdfs:comment "The basis of computer hardware for any ComputeDevice." ;
   rdfs:subClassOf schema:Thing .
 
-:HardwareStatus a rdfs:Class ;
+it:HardwareStatus a rdfs:Class ;
   rdfs:label "HardwareStatus" ;
   rdfs:comment "Status of a compute hardware device." ;
   rdfs:subClassOf schema:StatusEnumeration .
 
-:Active a :HardwareStatus ;
+it:Active a it:HardwareStatus ;
   rdfs:label "Active" ;
   rdfs:comment "The device is enabled and in use." .
 
-:Enabled a :HardwareStatus ;
+it:Enabled a it:HardwareStatus ;
   rdfs:label "Enabled" ;
   rdfs:comment "The device is enabled, but not currently in use." .
 
-:Disabled a :HardwareStatus ;
+it:Disabled a it:HardwareStatus ;
   rdfs:label "Disabled" ;
   rdfs:comment "The device is non-functional." .
 
-:operatingSystem a rdf:Property ;
+it:operatingSystem a rdf:Property ;
   rdfs:label "operatingSystem" ;
   rdfs:comment "The operating system of the device." ;
-  rdfs:domain :ComputeDevice ;
-  rdfs:range :OperatingSystemEnumeration .
+  rdfs:domain it:ComputeDevice ;
+  rdfs:range it:OperatingSystemEnumeration .
 
-:OperatingSystemEnumeration a rdfs:Class ;
+it:OperatingSystemEnumeration a rdfs:Class ;
   rdfs:label "OperatingSystemEnumeration" ;
   rdfs:comment "The platform's operating system." ;
   rdfs:subClassOf schema:Enumeration .
 
-:Windows a :OperatingSystemEnumeration ;
+it:Windows a it:OperatingSystemEnumeration ;
   rdfs:label "Windows" .
 
-:Linux a :OperatingSystemEnumeration ;
+it:Linux a it:OperatingSystemEnumeration ;
   rdfs:label "Linux" .
 
-:macOS a :OperatingSystemEnumeration ;
+it:macOS a it:OperatingSystemEnumeration ;
   rdfs:label "macOS" .
 
-:Android a :OperatingSystemEnumeration ;
+it:Android a it:OperatingSystemEnumeration ;
   rdfs:label "Android" .
 
-:iOS a :OperatingSystemEnumeration ;
+it:iOS a it:OperatingSystemEnumeration ;
   rdfs:label "iOS" .
 
-:iPadOS a :OperatingSystemEnumeration ;
+it:iPadOS a it:OperatingSystemEnumeration ;
   rdfs:label "iPadOS" .
