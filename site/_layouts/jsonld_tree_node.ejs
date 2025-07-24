@@ -1,6 +1,6 @@
-<%-include("header.ejs")%>
+<% if (Array.isArray(data) && data.length > 0) { %>
   <ul>
-    <% for (const item of content) { %>
+    <% for (const item of data) { %>
       <li>
         <a href="/<%=item["rdfs:label"]%>">
           <%=item["rdfs:label"]%>
@@ -9,4 +9,4 @@
       </li>
     <% } %>
   </ul>
-<%-include("footer.ejs")%>
+<% } %>

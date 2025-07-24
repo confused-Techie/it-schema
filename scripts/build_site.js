@@ -26,7 +26,7 @@ class BuildFile {
     this.output; // The final file output
   }
 
-  build() {
+  initialize() {
     if (this.ext === ".md") {
       this.data = yamlFront.loadFront(this.file);
       this.content = md.render(this.data.__content);
@@ -41,7 +41,9 @@ class BuildFile {
       // it's already been parsed
       this.content = this.file;
     }
+  }
 
+  build() {
     // After application specific parsing happens, we can utilize templates to
     // structure the content
     if (this.layout) {
@@ -90,6 +92,7 @@ class BuildSite {
         out_ext: ".html",
         func: (input) => {
           const file = new BuildFile(input, ".md");
+          file.initialize();
           file.build();
           return file.output;
         }
@@ -171,29 +174,85 @@ build.build();
 
 // Now with all the normal content having been built, the JSON-LD data can be
 // triggerred manually
-
 const jsonLdDataRaw = fs.readFileSync("./generated/schema.jsonld", { encoding: "utf-8" });
-const jsonLdFile = new BuildFile(jsonLdDataRaw, ".json");
-jsonLdFile.layout = "jsonld_tree.ejs";
-jsonLdFile.build();
 
-// Then the full tree will be written as an index file, rather than .html
-// so the parent folder must be made
-const outTargetSansExt = path.join(build.output, "hierarchy");
-BuildSite.WriteApacheModDir(outTargetSansExt, jsonLdFile.output);
-
-// Then to build the individual pages for each node of our JSON-LD graph
+// Starting with individual pages for each node of our JSON-LD graph
 
 const jsonLdData = JSON.parse(jsonLdDataRaw);
 
 for (const node of jsonLdData["@graph"]) {
   const nodeFile = new BuildFile(node, "");
   nodeFile.layout = "jsonld_node.ejs";
+  nodeFile.initialize();
+
+  // Then we will manually search the rest of the graph and add any properties
+  // and enumerations of our current id so they can be displayed in the page
+  nodeFile.content["@children"] = [];
+  nodeFile.content["@enumerations"] = [];
+
+  for (const innerNode of jsonLdData["@graph"]) {
+    if (typeof innerNode["rdfs:domain"] == "object" && innerNode["rdfs:domain"]["@id"] == node["@id"]) {
+      nodeFile.content["@children"].push(innerNode);
+    }
+    if (innerNode["@type"] === node["@id"]) {
+      nodeFile.content["@enumerations"].push(innerNode);
+    }
+  }
+
+  // Lastly before building we want to add the original JSON-LD data to the pages
+  // meta data to ensure it can appear in the header of the page
+  nodeFile.data = {};
+  nodeFile.data.jsonld = JSON.parse(jsonLdDataRaw); // We parse the original data to ensure it's clean from modification
   nodeFile.build();
 
   const outNodeTargetSansExt = path.join(build.output, node["rdfs:label"]);
   BuildSite.WriteApacheModDir(outNodeTargetSansExt, nodeFile.output);
 }
+
+// Now to build the full hierarchy page containing the top level data for the schema
+// But to do so, first we will create a custom object of the data as needed to
+// avoid an overly complex EJS file.
+
+const findDescendentClasses = (parent) => {
+  let list = [];
+
+  for (const node of jsonLdData["@graph"]) {
+    if (node["@type"] === "rdfs:Class" && typeof node["rdfs:subClassOf"] === "object" && node["rdfs:subClassOf"]["@id"] === parent) {
+      // Our current node is a class that is a subclass of the parent, lets see if
+      // it itself has any descendents
+      node["@children"] = findDescendentClasses(node["@id"]);
+      list.push(node);
+    }
+  }
+
+  return list;
+};
+
+const findBaseClasses = () => {
+  const list = [];
+
+  for (const node of jsonLdData["@graph"]) {
+    if (node["@type"] === "rdfs:Class" && typeof node["rdfs:subClassOf"] === "object" && node["rdfs:subClassOf"]["@id"].startsWith("schema:")) {
+      // Our current node is a class that descends from schema.org, so for our
+      // purposes is a base class. Lets find it's descendents
+      node["@children"] = findDescendentClasses(node["@id"]);
+      list.push(node);
+    }
+  }
+
+  return list;
+};
+
+const hierarchyData = findBaseClasses();
+
+const jsonLdFile = new BuildFile(hierarchyData, "");
+jsonLdFile.layout = "jsonld_tree.ejs";
+jsonLdFile.data = {};
+jsonLdFile.data.title = "Full schema hierarchy";
+jsonLdFile.initialize();
+jsonLdFile.build();
+
+fs.writeFileSync(path.join(build.output, "schema.html"), jsonLdFile.output, { encoding: "utf-8" });
 
 // Finally manually move over all data files
 fs.copyFileSync("./generated/schema.jsonld", path.join(build.output, "schema.jsonld"));

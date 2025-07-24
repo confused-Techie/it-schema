@@ -1,3 +1,47 @@
 <%-include("header.ejs")%>
   <h1><%=content["rdfs:label"]%></h1>
+  <% if (typeof content["rdfs:subClassOf"] == "object") { %>
+    <sub>Inherits from <%=content["rdfs:subClassOf"]["@id"]%>.</sub>
+  <% } %>
+  <p><%=content["rdfs:comment"]%></p>
+
+  <% if (Array.isArray(content["@children"]) && content["@children"].length > 0) { %>
+  <h2>Properties:</h2>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Property</th>
+        <th scope="col">Expected Type</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (node of content["@children"]) { %>
+        <tr>
+          <th scope="row">
+            <a href="/<%=node["rdfs:label"]%>">
+              <%=node["rdfs:label"]%>
+            </a>
+          </th>
+          <td><%=node["rdfs:range"]["@id"]%></td>
+          <td><%=node["rdfs:comment"]%></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <% } %>
+
+  <% if (Array.isArray(content["@enumerations"]) && content["@enumerations"].length > 0) { %>
+  <h2>Enumeration members:</h2>
+  <ul>
+    <% for (const enumeration of content["@enumerations"]) { %>
+      <li>
+        <a href="/<%=enumeration["rdfs:label"]%>">
+          <%=enumeration["rdfs:label"]%>
+        </a>
+      </li>
+    <% } %>
+  </ul>
+  <% } %>
+
 <%-include("footer.ejs")%>

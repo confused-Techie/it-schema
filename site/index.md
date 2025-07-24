@@ -3,4 +3,11 @@ title: IT-Schema
 layout: home.ejs
 ---
 
-Hello **World**!
+IT Schema is an ontology to describe computer hardware and devices, aimed to describe the general Information Technologies (IT's) environment and managed devices.
+
+This schema is ready to use in different encodings to ensure simplicity and compatibility, including
+* [JSON-LD](/schema.jsonld)
+* [RDFa](/schema.rdf)
+* [Turtle](/schema.ttl)
+
+For easier human consumption of the schema it is also fully available in [HTML](/schema.html).

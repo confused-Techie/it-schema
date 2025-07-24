@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title><%=content["rdfs:label"]%></title>
+    <title><%=content["rdfs:label"] ?? data?.title%></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <% if (typeof data["jsonld"] === "object") { %>
+    <script type="application/ld+json">
+      <%-JSON.stringify(data["jsonld"])%>
+    </script>
+    <% } %>
   </head>
   <body>
