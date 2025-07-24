@@ -1,0 +1,48 @@
+name: Build Site & Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Install NodeJS
+      uses: actions/setup-node@v3
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Generate schemas
+      run: npm run generate:schema
+
+    - name: Generate site
+      run: npm run generate:site
+
+    - name: Upload Artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: "./_dist"
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
+
+    - name: Commit newly generated schemas
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Auto generate schema updates

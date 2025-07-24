@@ -2,13 +2,12 @@
   "name": "it-schema",
   "version": "1.0.0",
   "description": "An ontology to describe computer hardware and devices, aimed to describe the general Information Technologies (IT's) environment and managed devices.",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "npx http-server ./_dist"
+    "serve": "npx http-server ./_dist",
+    "generate:schema": "node ./scripts/generate.js",
+    "generate:site": "node ./scripts/build_site.js"
   },
-  "keywords": [],
-  "author": "",
+  "author": "confused-Techie",
   "license": "MIT",
   "dependencies": {
     "@frogcat/ttl2jsonld": "^0.0.10",
