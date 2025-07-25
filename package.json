@@ -1,6 +1,6 @@
 {
   "name": "it-schema",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "An ontology to describe computer hardware and devices, aimed to describe the general Information Technologies (IT's) environment and managed devices.",
   "scripts": {
     "serve": "npx http-server ./_dist",
