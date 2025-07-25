@@ -91,7 +91,32 @@
       "@id": "it:deviceClass",
       "@type": "rdf:Property",
       "rdfs:label": "deviceClass",
-      "rdfs:comment": ""
+      "rdfs:comment": "The form factor of the device.",
+      "rdfs:domain": {
+        "@id": "it:PersonalComputer"
+      },
+      "rdfs:range": {
+        "@id": "it:ComputerFormFactor"
+      }
+    },
+    {
+      "@id": "it:ComputerFormFactor",
+      "@type": "rdfs:Class",
+      "rdfs:label": "ComputerFormFactor",
+      "rdfs:comment": "The form factor of a personal compute device.",
+      "rdfs:subClassOf": {
+        "@id": "schema:Enumeration"
+      }
+    },
+    {
+      "@id": "it:Laptop",
+      "@type": "it:ComputerFormFactor",
+      "rdfs:label": "Laptop"
+    },
+    {
+      "@id": "it:Desktop",
+      "@type": "it:ComputerFormFactor",
+      "rdfs:label": "Desktop"
     },
     {
       "@id": "it:hardware",
@@ -112,6 +137,18 @@
       "rdfs:comment": "The basis of computer hardware for any ComputeDevice.",
       "rdfs:subClassOf": {
         "@id": "schema:Thing"
+      }
+    },
+    {
+      "@id": "it:status",
+      "@type": "rdf:Property",
+      "rdfs:label": "status",
+      "rdfs:comment": "The current status of the hardware item.",
+      "rdfs:domain": {
+        "@id": "it:ComputeHardware"
+      },
+      "rdfs:range": {
+        "@id": "it:HardwareStatus"
       }
     },
     {
@@ -140,6 +177,69 @@
       "@type": "it:HardwareStatus",
       "rdfs:label": "Disabled",
       "rdfs:comment": "The device is non-functional."
+    },
+    {
+      "@id": "it:NetworkInterface",
+      "@type": "rdfs:Class",
+      "rdfs:label": "NetworkInterface",
+      "rdfs:comment": "A networking interface.",
+      "rdfs:subClassOf": {
+        "@id": "it:ComputeHardware"
+      }
+    },
+    {
+      "@id": "it:Graphics",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Graphics",
+      "rdfs:comment": "A device providing graphical capabilities.",
+      "rdfs:subClassOf": {
+        "@id": "it:ComputeHardware"
+      }
+    },
+    {
+      "@id": "it:Processor",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Processor",
+      "rdfs:comment": "A device providing processing capabilities.",
+      "rdfs:subClassOf": {
+        "@id": "it:ComputeHardware"
+      }
+    },
+    {
+      "@id": "it:RandomAccessMemory",
+      "@type": "rdfs:Class",
+      "rdfs:label": "RandomAccessMemory",
+      "rdfs:comment": "A device providing volatile memory access.",
+      "rdfs:subClassOf": {
+        "@id": "it:ComputeHardware"
+      }
+    },
+    {
+      "@id": "it:PowerSupply",
+      "@type": "rdfs:Class",
+      "rdfs:label": "PowerSupply",
+      "rdfs:comment": "The device/method used to supply power to a compute device.",
+      "rdfs:subClassOf": {
+        "@id": "it:ComputeHardware"
+      }
+    },
+    {
+      "@id": "it:Storage",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Storage",
+      "rdfs:comment": "A device providing a storage interface.",
+      "rdfs:subClassOf": {
+        "@id": "it:ComputeHardware"
+      }
+    },
+    {
+      "@id": "it:Motherboard",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Motherboard",
+      "rdfs:comment": "The motherboard or mainboard of a compute device.",
+      "rdfs:subClassOf": {
+        "@id": "it:ComputeHardware"
+      }
     },
     {
       "@id": "it:operatingSystem",
