@@ -48,7 +48,20 @@ it:PersonalComputer a rdfs:Class ;
 
 it:deviceClass a rdf:Property ;
   rdfs:label "deviceClass" ;
-  rdfs:comment "" .
+  rdfs:comment "The form factor of the device." ;
+  rdfs:domain it:PersonalComputer ;
+  rdfs:range it:ComputerFormFactor .
+
+it:ComputerFormFactor a rdfs:Class ;
+  rdfs:label "ComputerFormFactor" ;
+  rdfs:comment "The form factor of a personal compute device." ;
+  rdfs:subClassOf schema:Enumeration .
+
+it:Laptop a it:ComputerFormFactor ;
+  rdfs:label "Laptop" .
+
+it:Desktop a it:ComputerFormFactor ;
+  rdfs:label "Desktop" .
 
 it:hardware a rdf:Property ;
   rdfs:label "hardware" ;
@@ -60,6 +73,12 @@ it:ComputeHardware a rdfs:Class ;
   rdfs:label "ComputeHardware" ;
   rdfs:comment "The basis of computer hardware for any ComputeDevice." ;
   rdfs:subClassOf schema:Thing .
+
+it:status a rdf:Property ;
+  rdfs:label "status" ;
+  rdfs:comment "The current status of the hardware item." ;
+  rdfs:domain it:ComputeHardware ;
+  rdfs:range it:HardwareStatus .
 
 it:HardwareStatus a rdfs:Class ;
   rdfs:label "HardwareStatus" ;
@@ -77,6 +96,41 @@ it:Enabled a it:HardwareStatus ;
 it:Disabled a it:HardwareStatus ;
   rdfs:label "Disabled" ;
   rdfs:comment "The device is non-functional." .
+
+it:NetworkInterface a rdfs:Class ;
+  rdfs:label "NetworkInterface" ;
+  rdfs:comment "A networking interface." ;
+  rdfs:subClassOf it:ComputeHardware .
+
+it:Graphics a rdfs:Class ;
+  rdfs:label "Graphics" ;
+  rdfs:comment "A device providing graphical capabilities." ;
+  rdfs:subClassOf it:ComputeHardware .
+
+it:Processor a rdfs:Class ;
+  rdfs:label "Processor" ;
+  rdfs:comment "A device providing processing capabilities." ;
+  rdfs:subClassOf it:ComputeHardware .
+
+it:RandomAccessMemory a rdfs:Class ;
+  rdfs:label "RandomAccessMemory" ;
+  rdfs:comment "A device providing volatile memory access." ;
+  rdfs:subClassOf it:ComputeHardware .
+
+it:PowerSupply a rdfs:Class ;
+  rdfs:label "PowerSupply" ;
+  rdfs:comment "The device/method used to supply power to a compute device." ;
+  rdfs:subClassOf it:ComputeHardware .
+
+it:Storage a rdfs:Class ;
+  rdfs:label "Storage" ;
+  rdfs:comment "A device providing a storage interface." ;
+  rdfs:subClassOf it:ComputeHardware .
+
+it:Motherboard a rdfs:Class ;
+  rdfs:label "Motherboard" ;
+  rdfs:comment "The motherboard or mainboard of a compute device." ;
+  rdfs:subClassOf it:ComputeHardware .
 
 it:operatingSystem a rdf:Property ;
   rdfs:label "operatingSystem" ;

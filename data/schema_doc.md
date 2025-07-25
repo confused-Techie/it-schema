@@ -43,7 +43,7 @@ A personal computer device, generally used by clients or end-users.
 
 | Property Name | Property Type | Property Description |
 | --- | --- | --- |
-| deviceClass | PersonalComputerClass | The class of the device it is. |
+| deviceClass | ComputerFormFactor | The form factor of the device. |
 
 ## ComputeHardware
 
@@ -127,11 +127,11 @@ Enumeration members:
 * Disabled: The device has been disabled.
 * Broken: The device is non-functional.
 
-## PersonalComputerClass
+## ComputerFormFactor
 
-> Thing > Intangible > Enumeration > PersonalComputerClass
+> Thing > Intangible > Enumeration > ComputerFormFactor
 
-The class of a personal computer.
+The form factor of a personal compute device.
 
 Enumeration members:
 * Laptop: The device is a portable laptop.
