@@ -6,10 +6,5 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#1b1b1b" />
-    <% if (typeof data["jsonld"] === "object") { %>
-    <script type="application/ld+json">
-      <%-JSON.stringify(data["jsonld"])%>
-    </script>
-    <% } %>
   </head>
   <body>

@@ -1,2 +1,7 @@
+  <% if (typeof data["jsonld"] === "object") { %>
+  <script type="application/ld+json">
+    <%-JSON.stringify(data["jsonld"])%>
+  </script>
+  <% } %>
   </body>
 </html>
